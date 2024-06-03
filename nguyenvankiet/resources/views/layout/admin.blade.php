@@ -103,7 +103,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                                    <a href="/admin/topic" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Chủ đề</p>
                                     </a>
@@ -111,7 +111,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/admin/order" class="nav-link">
                                 <i class="fas fa-shopping-bag"></i>
                                 <p>Giỏ hàng</p>
                             </a>
@@ -132,7 +132,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../forms/general.html" class="nav-link">
+                                    <a href="/admin/menu" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Menu</p>
                                     </a>
@@ -155,7 +155,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../tables/simple.html" class="nav-link">
+                                    <a href="/admin/user" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tất cả thành viên</p>
                                     </a>

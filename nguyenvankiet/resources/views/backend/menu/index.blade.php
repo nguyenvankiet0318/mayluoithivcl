@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-12">
-                        <h1 class="d-inline">Tất cả bài Post</h1>
+                        <h1 class="d-inline">Tất cả Menu</h1>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <div class="card-header text-right">
                     <button class="btn btn-sm btn-success">
                         <i class="fa fa-solid fa-plus"></i>
-                        Thêm Post
+                        Thêm menu
                     </button>
                     <button class="btn btn-sm btn-success">
                         <i class="fa fa-save" aria-hidden="true"></i>
@@ -27,47 +27,51 @@
                 <div class="card-body">
                     <div class="row">
                      <div class="col-md-4">
-                        <form action="{{ route('admin.post.store') }}" method="post">
+                        <form action="{{ route('admin.menu.store') }}" method="post">
                             @csrf
                             <div class="mb-3">
-                                <label>Tên Post (*)</label>
-                                <input type="text" name="title" id="title" placeholder="Nhập tiêu đề"
-                                    class="form-control" value="{{ old('title') }}">
-                                @error('title')
+                                <label>Tên Menu (*)</label>
+                                <input type="text" name="name" id="name" placeholder="Nhập tên danh mục"
+                                    class="form-control" value="{{ old('name') }}">
+                                @error('name')
                                     {{ $message }}
                                 @enderror
                             </div>
                             <div class="mb-3">
-    <label>Topic (*)</label>
-    <select name="topic_id" class="form-control">
-        <option value="">Chọn Topic</option>
-        @foreach($topics as $id => $name)
-        <option value="{{ $id }}">{{ $name }}</option>
-        @endforeach
-    </select>
-</div>
-
-<div class="mb-3">
-                                <label>Chi tiết (*)</label>
-                                <textarea rows="3" name="detail" id="detail" placeholder="Nhập chi tiết sản phẩm" class="form-control"></textarea>
+                                <label>Menu cha (*)</label>
+                                <select name="parent_id" class="form-control">
+                                    <option value="0">None</option>
+                                    {!! $htmlparentId !!}
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label>Slug (*)</label>
-                                <textarea rows="3" name="slug" id="slug" placeholder="Nhập mô tả danh mục" class="form-control"></textarea>
+                                <label>Link (*)</label>
+                                <textarea rows="3" name="link" id="link" placeholder="Nhập link" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
+                                <label>type (*)</label>
+                                <textarea rows="1" name="type" id="type" placeholder="Type" class="form-control"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label>Table Id (*)</label>
+                                <input type="number" name="table_id" id="table_id" placeholder="table id" class="form-control"></textarea>
+                            </div>
+                            <!-- <div class="mb-3">
                                 <label>Hình đại diện</label>
                                 <input type="file" name="image" class="form-control">
+                            </div> -->
+                            <div class="mb-3">
+                                <label>Sắp xếp</label>
+                                <select name="sort_order" class="form-control">
+                                    <option value="0">Chọn vị trí</option>
+                                    {!! $htmlsortOrder!!}
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label>Mô tả (*)</label>
-                                <textarea rows="3" name="description" id="description" placeholder="Nhập mô tả danh mục" class="form-control"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label>Định dạng</label>
-                                <select name="type" class="form-control">
-                                    <option value="page">Trang</option>
-                                    <option value="post">Bài</option>
+                                <label>Vị trí</label>
+                                <select name="position" class="form-control">
+                                    <option value="mainmenu">Main menu</option>
+                                    <option value="footermenu">Footer menu</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -83,18 +87,18 @@
                                     Lưu
                                 </button>
                             </div>
+
                         </form>
-                    </div>          
-                    <div class="col-md-8">
+                    </div> 
+                                           <div class="col-md-8">
                             <table class="table table-bordered">
             <thead>
                                     <tr>
                                         <th class="text-center" style="width:30px;">
                                             <input type="checkbox">
                                         </th>
-                                        <th class="text-center" style="width:130px;">Hình ảnh</th>
-                                        <th>Tên danh mục</th>
-                                        <th>Tên slug</th>
+                                        <th>Tên menu</th>
+                                        <th>Vị trí</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -104,15 +108,13 @@
                                             <td>
                                                 <input type="checkbox">
                                             </td>
+                                            
                                             <td>
-                                                <img src="../public/images/category.jpg" alt="category.jpg">
-                                            </td>
-                                            <td>
-                                                <div class="title">
-                                                    {{ $row->title }}
+                                                <div class="name">
+                                                    {{ $row->name }}
                                                 </div>
                                             </td>
-                                            <td> {{ $row->slug }}</td>
+                                            <td> {{ $row->position }}</td>
                                             <td>
                                                 <div class="function_style">
                                                     <button class="bg-success">
@@ -133,7 +135,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 

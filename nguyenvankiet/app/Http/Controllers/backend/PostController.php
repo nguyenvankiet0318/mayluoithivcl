@@ -24,7 +24,7 @@ class PostController extends Controller
         $post = new Post();
         $post->topic_id = $request->topic_id; //form
         $post->title = $request->title; //form
-        $post->slug = Str::of($request->name)->slug('-');
+        $post->slug = Str::of($request->title)->slug('-');
         $post->detail = $request->detail; //form
          //upload image
         //  $files = $request->image;

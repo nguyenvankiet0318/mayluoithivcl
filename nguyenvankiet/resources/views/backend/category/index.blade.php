@@ -85,6 +85,7 @@
                                         <th class="text-center" style="width:130px;">Hình ảnh</th>
                                         <th>Tên danh mục</th>
                                         <th>Tên slug</th>
+                                        <th>Mô tả</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -103,6 +104,7 @@
                                                 </div>
                                             </td>
                                             <td> {{ $row->slug }}</td>
+                                            <td> {{ $row->description }}</td>
                                             <td>
                                                 <div class="function_style">
                                                     <button class="bg-success">

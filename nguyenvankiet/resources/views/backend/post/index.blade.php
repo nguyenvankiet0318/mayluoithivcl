@@ -51,10 +51,7 @@
                                 <label>Chi tiết (*)</label>
                                 <textarea rows="3" name="detail" id="detail" placeholder="Nhập chi tiết sản phẩm" class="form-control"></textarea>
                             </div>
-                            <div class="mb-3">
-                                <label>Slug (*)</label>
-                                <textarea rows="3" name="slug" id="slug" placeholder="Nhập mô tả danh mục" class="form-control"></textarea>
-                            </div>
+                          
                             <div class="mb-3">
                                 <label>Hình đại diện</label>
                                 <input type="file" name="image" class="form-control">

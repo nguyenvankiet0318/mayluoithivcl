@@ -1,12 +1,12 @@
 @extends('layout.admin')
-@section('title', 'Product')
+@section('title', 'Order')
 @section('content')
-    <div class="content-wrapper">
+<div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-12">
-                        <h1 class="d-inline">Tất cả Sản Phẩm</h1>
+                        <h1 class="d-inline">Tất cả Đơn hàng</h1>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <div class="card-header text-right">
                     <button class="btn btn-sm btn-success">
                         <i class="fa fa-solid fa-plus"></i>
-                        Thêm sản phẩm
+                        Thêm menu
                     </button>
                     <button class="btn btn-sm btn-success">
                         <i class="fa fa-save" aria-hidden="true"></i>
@@ -27,62 +27,64 @@
                 <div class="card-body">
                     <div class="row">
                      <div class="col-md-4">
-                        <form action="{{ route('admin.product.store') }}" method="post">
+                        <form action="{{ route('admin.order.store') }}" method="post">
                             @csrf
                             <div class="mb-3">
-                                <label>Tên danh mục (*)</label>
-                                <input type="text" name="name" id="name" placeholder="Nhập tên danh mục"
-                                    class="form-control" value="{{ old('name') }}">
-                                @error('name')
+                                <label>Tên người giao hàng (*)</label>
+                                <input type="text" name="delivery_name" id="delivery_name" placeholder="Nhập tên người vận chuyển"
+                                    class="form-control" value="{{ old('delivery_name') }}">
+                                @error('delivery_name')
                                     {{ $message }}
                                 @enderror
                             </div>
                             <div class="mb-3">
-    <label>Danh mục cha (*)</label>
-    <select name="category_id" class="form-control">
-        <option value="">Chọn danh mục</option>
-        @foreach($categories as $id => $name)
+    <label>User (*)</label>
+    <select name="user_id" class="form-control">
+        <option value="">Chọn User</option>
+        @foreach($users as $id => $name)
         <option value="{{ $id }}">{{ $name }}</option>
         @endforeach
     </select>
 </div>
 <div class="mb-3">
-                                <label>Chi tiết (*)</label>
-                                <textarea rows="3" name="detail" id="detail" placeholder="Nhập chi tiết sản phẩm" class="form-control"></textarea>
+                                <label>giới tính người vận chuyển (*)</label>
+                                <textarea rows="1" name="delivery_gender" id="delivery_gender" placeholder="delivery gender" class="form-control"></textarea>
                             </div>
                             <!-- <div class="mb-3">
-                                <label>Slug (*)</label>
-                                <textarea rows="3" name="slug" id="slug" placeholder="Nhập mô tả danh mục" class="form-control"></textarea>
+                                <label>giới tính người vận chuyển</label>
+                                <select name="delivery_gender" class="form-control">
+                                    <option value="nam">Nam</option>
+                                    <option value="nữ">Nữ</option>
+                                </select>
                             </div> -->
                             <div class="mb-3">
-                                <label>Hình đại diện</label>
-                                <input type="file" name="image" class="form-control">
+                                <label>Email của người vận chuyển (*)</label>
+                                <textarea rows="1" name="delivery_email" id="delivery_email" placeholder="delivery's email" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label>Mô tả (*)</label>
-                                <textarea rows="3" name="description" id="description" placeholder="Nhập mô tả danh mục" class="form-control"></textarea>
+                                <label>Số điện thoại của người vận chuyển (*)</label>
+                                <input type="number" name="delivery_phone" id="delivery_phone" placeholder="delivery's phone" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label>Giá tiền (*)</label>
-                                <input type="number" name="price" id="price" placeholder="Nhập giá tiền" class="form-control"></input>
+                                <label>địa chỉ của người vận chuyển (*)</label>
+                                <textarea rows="1" name="delivery_address" id="delivery_address" placeholder="delivery's address" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label>Giá sau khi được giảm (*)</label>
-                                <input type="number" name="pricesale" id="pricesale" placeholder="Nhập giá tiền" class="form-control"></input>
+                                <label>Type (*)</label>
+                                <textarea rows="1" name="type" id="type" placeholder="type" class="form-control"></textarea>
                             </div>
                             <!-- <div class="mb-3">
-                                <label>Hình đại diện</label>
-                                <input type="file" name="image" class="form-control">
+                                <label>Note</label>
+                                <select name="note" class="form-control">
+                                    <option value="Mua tại quầy">Mua tại quầy</option>
+                                    <option value="Mua online">Mua online</option>
+                                </select>
                             </div> -->
-                         <div class="mb-3">
-    <label>Thương Hiệu (*)</label>
-    <select name="brand_id" class="form-control">
-        <option value="">Chọn thương hiệu</option>
-        @foreach($brands as $id => $name)
-        <option value="{{ $id }}">{{ $name }}</option>
-        @endforeach
-    </select>
-</div>
+                            <div class="mb-3">
+                                <label>Note (*)</label>
+                                <textarea rows="1" name="note" id="note" placeholder="note" class="form-control"></textarea>
+                            </div>
+                            
                             <div class="mb-3">
                                 <label>Trạng thái</label>
                                 <select name="status" class="form-control">
@@ -96,22 +98,22 @@
                                     Lưu
                                 </button>
                             </div>
+
                         </form>
-                    </div>          
-                    <div class="col-md-8">
+                    </div> 
+                                           <div class="col-md-8">
                             <table class="table table-bordered">
             <thead>
                                     <tr>
                                         <th class="text-center" style="width:30px;">
                                             <input type="checkbox">
                                         </th>
-                                        <th class="text-center" style="width:130px;">Hình ảnh</th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Slug</th>
-                                        <th>Miêu tả</th>
-                                        <th>Giá gốc</th>
-                                        <th>Giá giảm</th>
-                                        <th>Tên slug</th>
+                                        <th>Tên người giao hàng</th>
+                                        <th>Số điện thoại người giao hàng</th>
+                                        <th>Email của người giao hàng</th>
+                                        <th>Địa chỉ người giao hàng</th>
+                                        <th>Giới tính người giao hàng</th>
+
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -121,18 +123,17 @@
                                             <td>
                                                 <input type="checkbox">
                                             </td>
-                                            <td>
-                                                <img src="../public/images/category.jpg" alt="category.jpg">
-                                            </td>
+                                            
                                             <td>
                                                 <div class="name">
-                                                    {{ $row->name }}
+                                                    {{ $row->delivery_name }}
                                                 </div>
                                             </td>
-                                            <td> {{ $row->slug }}</td>
-                                            <td> {{ $row->description }}</td>
-                                            <td> {{ $row->price }}</td>
-                                            <td> {{ $row->pricesale }}</td>
+                                            <td> {{ $row->delivery_phone     }}</td>
+                                            <td> {{ $row->delivery_email     }}</td>
+                                            <td> {{ $row->delivery_address     }}</td>
+                                            <td> {{ $row->delivery_gender     }}</td>
+
                                             <td>
                                                 <div class="function_style">
                                                     <button class="bg-success">
@@ -153,7 +154,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 

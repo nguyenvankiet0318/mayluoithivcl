@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $category = new Category();
-        dd($request->all());
+        // dd($request->all());
         $category->name = $request->name;
         $category->slug = Str::of($request->name)->slug('-');
         $category->parent_id = $request->parent_id;

@@ -115,8 +115,8 @@
                                         <th class="text-center" style="width:30px;">
                                             <input type="checkbox">
                                         </th>
-                                        <th>Tên danh mục</th>
-                                        <th>Tên slug</th>
+                                        <th>Tên Liên Hệ</th>
+                                        <th>Số điện thoại</th>
                                         <th></th>
                                     </tr>
                                 </thead>
