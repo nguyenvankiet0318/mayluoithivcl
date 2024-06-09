@@ -27,7 +27,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <form action="{{ route('admin.brand.store') }}" method="post">
+                        <form action="{{ route('admin.brand.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label>Tên brand (*)</label>
@@ -94,10 +94,10 @@
                                         <input type="checkbox">
                                     </td>
                                     <td>
-                                        {{$row->id}}
+                                    {{$row->id}}
                                     </td>
                                     <td>
-                                        <img src="{{asset('images/category/'.$row->link)}}" alt="category.jpg">
+                                        <img src="{{asset('images/brands/'.$row->image)}}" style="width:300px" alt="{{$row->image}}">
                                     </td>
                                     <td>
                                         {{$row->name}}
@@ -108,26 +108,29 @@
                                     <td>
                                         {{$row->description}}
                                     </td>
-                                    <td>
-                                        <a class="btn btn-sm btn-warning" href="#">Hiện</a>
-                                        <a class="btn btn-sm btn-success" href="#">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-info" href="{{route('admin.category.show',['id', $row->id])}}">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-danger" href="#">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                    @php
+                                                $args=['id'=>$row->id];
+                                            @endphp
+                                        <td>
+                                            <a class="btn btn-sm btn-warning" href="#">Hiện</a>
+                                            <a class="btn btn-sm btn-success" href="{{route('admin.brand.edit',$args)}}">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-info" href="{{route('admin.category.show',$args)}}">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-danger" href="{{route('admin.category.delete',$args)}}">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 @endsection

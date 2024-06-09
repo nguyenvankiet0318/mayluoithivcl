@@ -67,7 +67,7 @@
                                 <select name="roles" class="form-control">
                                     <option value="{{ $user->roles }}">{{ old('roles', $user->roles) }}</option>
                                     <option value="Admin">Admin</option>
-                                    <option value="User">User</option>
+                                    <option value="Customer">Customer</option>
                                 </select>
                             </div>
                             <div class="mb-3">

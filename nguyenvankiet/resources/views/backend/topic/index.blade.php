@@ -61,7 +61,7 @@
                             <div class="mb-3">
                                 <label for="sort_order">Sắp xếp</label>
                                 <select name="sort_order" id="sort_order" class="form-control">
-                                    <option value="0">Chọn vị trí</option>
+                                    <!-- <option value="0">Chọn vị trí</option> -->
                                     {!! $htmlsortorder !!}
                                 </select>
                             </div>

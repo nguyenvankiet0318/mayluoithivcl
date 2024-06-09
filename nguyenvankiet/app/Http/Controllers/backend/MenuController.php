@@ -20,7 +20,7 @@ class MenuController extends Controller
         foreach($list as $item)
         {
             $htmlparentId .= "<option value='".$item->id."'>".$item->name."</option>";
-            $htmlsortOrder .="<option value='" . $item->sort_order . "'>" . $item->name . "</option>";        
+            $htmlsortOrder .="<option value='" . $item->sort_order + 1 . "'>" . $item->name . "</option>";        
         }
         return view("backend.menu.index", compact('list','htmlparentId','htmlsortOrder'));
     }

@@ -16,9 +16,15 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $list = Banner::where('status', '!=', 0)->orderBy('created_at', 'desc')->get();
-        // return view("backend.category.index", compact("list"));
-        return view('backend.banner.index',compact("list"));
+        $list = Banner::where('banner.status','!=',0)
+        ->select('banner.id','banner.name','banner.link','banner.image')
+        ->orderBy('banner.created_at','desc')
+        ->get();
+        $htmlposition = "";
+        foreach ($list as $item){
+            $htmlposition .= "<option value='" . ($item->position+1) . "'>Sau " . $item->name . "</option>";
+        }
+        return view("backend.banner.index",compact("list","htmlposition"));   
     }
 
     /**
@@ -39,6 +45,15 @@ class BannerController extends Controller
         $banner->created_at = date('Y-m-d H:i:s');
         $banner->created_by = Auth::id() ?? 1;
         $banner->status = $request->status;
+        if($request->hasFile('image')){
+            if(in_array($request->image->extension(), ["jpg", "png", "webp", "gif"])){
+                $currentDateTime = now()->format('YmdHis');
+                $fileName = $currentDateTime . '.' . $request->image->extension();
+                $request->image->move(public_path("images/banner"), $fileName);
+                $banner->image = $fileName;
+            }
+        }
+
         $banner->save();
         return redirect()->route('admin.banner.index');
     }

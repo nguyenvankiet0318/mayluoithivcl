@@ -24,7 +24,7 @@ class BrandController extends Controller
         $htmlsortOrder = "";
         foreach($list as $item)
         {
-            $htmlsortOrder .="<option value='" . $item->sort_order . "'>" . $item->name . "</option>";        
+            $htmlsortOrder .="<option value='" . $item->sort_order + 1 . "'>" . $item->name . "</option>";        
         }
         return view("backend.brand.index", compact('list','htmlsortOrder'));  
         // return view('backend.category.index',compact("list"));
@@ -50,6 +50,13 @@ class BrandController extends Controller
             $brand->created_at = date('Y-m-d H:i:s');
             $brand->created_by = Auth::id() ?? 1;
             $brand->status = $request->status;
+            if($request->hasFile('image')){
+                if(in_array($request->image->extension(), ["jpg", "png", "webp", "gif"])){
+                    $fileName = $brand->slug . '.' . $request->image->extension();
+                    $request->image->move(public_path("images/brands"), $fileName);
+                    $brand->image = $fileName;
+                }
+            }
             $brand->save();
             return redirect()->route('admin.brand.index');
         
@@ -68,7 +75,29 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $brand = Brand::find($id);
+        if($brand == null)
+        {
+            session()->flash('error', 'Dữ liệu id của danh mục không tồn tại!');
+            return view("backend.brand.index");
+        }
+        $list = Brand::where('brand.status', '!=', 0)
+            ->select('brand.id', 'brand.name', 'brand.image', 'brand.slug', 'brand.sort_order')
+            ->orderBy('brand.created_at', 'desc')
+            ->get();
+     
+        $htmlsortOrder = "";
+        foreach ($list as $item) {
+          
+
+            if($brand->sort_order-1 == $item->sort_order){
+                $htmlsortOrder .= "<option selected value='" . ($item->sort_order + 1) . "'>Sau " . $item->name . "</option>";
+            }
+            else{
+                $htmlsortOrder .= "<option value='" . ($item->sort_order + 1) . "'>Sau " . $item->name . "</option>";
+            }
+        }
+        return view("backend.brand.edit", compact("brand",  "htmlsortOrder"));
     }
 
     /**
@@ -76,7 +105,28 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $brand = Brand::find($id);
+        if($brand==null){
+            //chuyen trang va bao loi
+        }
+        $brand->name = $request->name;
+        $brand->slug = Str::of($request->name)->slug('-');
+       
+        $brand->sort_order = $request->sort_order;
+        $brand->description = $request->description;
+        $brand->created_at = date('Y-m-d H:i:s');
+        $brand->created_by = Auth::id() ?? 1;
+        $brand->status = $request->status;
+        if($request->hasFile('image')){
+            if(in_array($request->image->extension(), ["jpg", "png", "webp", "gif"])){
+                $fileName = $brand->slug . '.' . $request->image->extension();
+                $request->image->move(public_path("images/brands"), $fileName);
+                $brand->image = $fileName;
+            }
+        }
+        $brand->save();
+        return redirect()->route('admin.brand.index');
+
     }
 
     /**

@@ -55,7 +55,7 @@
                             <div class="mb-3">
                                 <label>Sắp xếp</label>
                                 <select name="sort_order" class="form-control">
-                                    <option value="0">Chọn vị trí</option>
+                                    <!-- <option value="{{ $category->sortorder}}">Chọn vị trí</option> -->
                                     {!! $htmlsortorder!!}
                                 </select>
                             </div>

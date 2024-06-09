@@ -62,7 +62,7 @@ class TopicController extends Controller
             return view("backend.topic.index");
         }
         $list = Topic::where('topic.status', '!=', 0)
-            ->select('topic.id', 'topic.name', 'topic.slug', 'topic.description')
+            ->select('topic.id', 'topic.name', 'topic.slug', 'topic.description', 'topic.sort_order')
             ->orderBy('topic.created_at', 'desc')
             ->get();
         $htmlsortorder = "";
