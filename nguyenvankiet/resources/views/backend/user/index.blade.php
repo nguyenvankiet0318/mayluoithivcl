@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="row">
                      <div class="col-md-4">
-                        <form action="{{ route('admin.user.store') }}" method="post">
+                        <form action="{{ route('admin.user.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label>Tên User (*)</label>
@@ -98,6 +98,9 @@
                                         <th class="text-center" style="width:30px;">
                                             <input type="checkbox">
                                         </th>
+                                        <th class="text-center" style="width:30px;">
+                                            Image
+                                        </th>
                                         <th>Tên người dùng</th>
                                         <th>Số điện thoại</th>
                                         <th></th>
@@ -106,9 +109,13 @@
                                 <tbody>
                                     @foreach ($list as $row)
                                         <tr class="datarow">
-                                            <td>
+                                        <td>
                                                 <input type="checkbox">
                                             </td>
+                                            <td>
+                                            <img src="{{asset('images/users/'.$row->image)}}" style="width:300px" alt="{{ $row->image }}">
+                                            </td>
+                                           
                                             
                                             <td>
                                                 <div class="name">
@@ -117,19 +124,22 @@
                                             </td>
                                             <td> {{ $row->phone }}</td>
                                             <td>
+                                            @php
+                                                    $agrs=['id' => $row->id]
+                                                @endphp
                                                 <div class="function_style">
-                                                    <button class="bg-success">
+                                                    <a href="{{ route('admin.user.show', $agrs)}}" class="bg-success">
                                                         <i class="fa fa-solid fa-eye "></i>
-                                                    </button>
-                                                    {{-- <button>
+                                                    </a>
+                                                    {{-- <a >
                                                     <i class="fa-solid fa-pen-to-square"></i>
-                                                </button> --}}
-                                                    <button class="bg-primary">
+                                                    </a> --}}
+                                                    <a class="bg-primary" href="{{ route('admin.user.edit', $agrs)}}">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button class="bg-danger">
+                                                    </a>
+                                                    <a class="bg-danger" href="{{ route('admin.user.delete', $agrs)}}">
                                                         <i class="fa fa-solid fa-trash "></i>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

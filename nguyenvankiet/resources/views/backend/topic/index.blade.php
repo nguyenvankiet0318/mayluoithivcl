@@ -55,8 +55,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="description">Mô tả</label>
-                                <textarea name="description" id="description" rows="3" class="form-control">
-                                {{ old('description') }}
+                                <textarea name="description" id="description" rows="3" class="form-control">{{ old('description') }}
                               </textarea>
                             </div>
                             <div class="mb-3">
@@ -97,28 +96,30 @@
                                         <th class="text-center">
                                             <input type="checkbox">
                                         </th>
-                                        <th class="text-center">
-                                            <img src="{{ asset('assets/images/categorys/' . $row->image) }}"
-                                                class="img-fluid" alt="{{ $row->image }}">
-                                        </th>
                                         <th>{{ $row->name }}</th>
                                         <th>{{ $row->slug }}</th>
+                                        <div class="function_style">
+                                        @php
+                                                    $agrs=['id' => $row->id]
+                                                @endphp
                                         <th class="text-center">
                                             <a href="#" class="btn btn-sm btn-success">
                                                 <i class="fa fa-toggle-on" aria-hidden="true"></i>
                                             </a>
-                                            <a href="{{ route('admin.topic.show', ['id' => $row->id]) }}"
+                                            <a href="{{ route('admin.topic.show',  $agrs) }}"
                                                 class="btn btn-sm btn-info">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
-                                            <a href="#" class="btn btn-sm btn-primary">
+                                            <a href="{{ route('admin.topic.edit',  $agrs) }}" class="btn btn-sm btn-primary">
                                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                             </a>
-                                            <a href="#" class="btn btn-sm btn-danger">
+                                            <a href="{{ route('admin.topic.delete',  $agrs) }}" class="btn btn-sm btn-danger">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
 
                                         </th>
+                                        </div>
+
                                         <th class="text-center">{{ $row->id }}</th>
                                     </tr>
                                 @endforeach

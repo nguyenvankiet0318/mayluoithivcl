@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="row">
                      <div class="col-md-4">
-                        <form action="{{ route('admin.product.store') }}" method="post">
+                        <form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label>Tên danh mục (*)</label>
@@ -48,7 +48,7 @@
 </div>
 <div class="mb-3">
                                 <label>Chi tiết (*)</label>
-                                <textarea rows="3" name="detail" id="detail" placeholder="Nhập chi tiết sản phẩm" class="form-control"></textarea>
+                                <textarea rows="3" name="detail" id="detail" placeholder="Nhập chi tiết sản phẩm" class="form-control" >{{ old('detail') }}</textarea>
                             </div>
                             <!-- <div class="mb-3">
                                 <label>Slug (*)</label>
@@ -60,15 +60,15 @@
                             </div>
                             <div class="mb-3">
                                 <label>Mô tả (*)</label>
-                                <textarea rows="3" name="description" id="description" placeholder="Nhập mô tả danh mục" class="form-control"></textarea>
+                                <textarea rows="3" name="description" id="description" placeholder="Nhập mô tả danh mục" class="form-control" >{{ old('description') }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label>Giá tiền (*)</label>
-                                <input type="number" name="price" id="price" placeholder="Nhập giá tiền" class="form-control"></input>
+                                <input type="number" name="price" id="price" placeholder="Nhập giá tiền" class="form-control" >{{ old('price') }}</input>
                             </div>
                             <div class="mb-3">
                                 <label>Giá sau khi được giảm (*)</label>
-                                <input type="number" name="pricesale" id="pricesale" placeholder="Nhập giá tiền" class="form-control"></input>
+                                <input type="number" name="pricesale" id="pricesale" placeholder="Nhập giá tiền" class="form-control" >{{ old('pricesale') }}</input>
                             </div>
                             <!-- <div class="mb-3">
                                 <label>Hình đại diện</label>
@@ -122,7 +122,8 @@
                                                 <input type="checkbox">
                                             </td>
                                             <td>
-                                                <img src="../public/images/category.jpg" alt="category.jpg">
+                                                <!-- {{ $row->image }} -->
+                                            <img src="{{asset('images/products/'.$row->image)}}" style="width:300px" alt="{{ $row->image }}">
                                             </td>
                                             <td>
                                                 <div class="name">
@@ -134,19 +135,22 @@
                                             <td> {{ $row->price }}</td>
                                             <td> {{ $row->pricesale }}</td>
                                             <td>
+                                            @php
+                                                    $agrs=['id' => $row->id]
+                                                @endphp
                                                 <div class="function_style">
-                                                    <button class="bg-success">
+                                                    <a href={{ route('admin.product.show', $agrs)}} class="bg-success">
                                                         <i class="fa fa-solid fa-eye "></i>
-                                                    </button>
-                                                    {{-- <button>
+                                                    </a>
+                                                    {{-- <a>
                                                     <i class="fa-solid fa-pen-to-square"></i>
-                                                </button> --}}
-                                                    <button class="bg-primary">
+                                                </a> --}}
+                                                    <a href={{ route('admin.product.edit', $agrs)}} class="bg-primary">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button class="bg-danger">
+                                                    </a>
+                                                    <a href={{ route('admin.product.delete', $agrs)}} class="bg-danger">
                                                         <i class="fa fa-solid fa-trash "></i>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

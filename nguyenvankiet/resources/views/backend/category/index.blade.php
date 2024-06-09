@@ -1,6 +1,11 @@
 @extends('layout.admin')
 @section('title', 'Category')
 @section('content')
+@if (session('success'))
+    <script>
+        toastr.success("{{ session('success') }}");
+    </script>
+@endif
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
@@ -27,7 +32,7 @@
                 <div class="card-body">
                     <div class="row">
                      <div class="col-md-4">
-                        <form action="{{ route('admin.category.store') }}" method="post">
+                        <form action="{{ route('admin.category.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label>Tên danh mục (*)</label>
@@ -46,7 +51,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>Mô tả (*)</label>
-                                <textarea rows="3" name="description" id="description" placeholder="Nhập mô tả danh mục" class="form-control"></textarea>
+                                <textarea rows="3" name="description" id="description" placeholder="Nhập mô tả danh mục" class="form-control" ></textarea>
                             </div>
                             <div class="mb-3">
                                 <label>Hình đại diện</label>
@@ -96,7 +101,7 @@
                                                 <input type="checkbox">
                                             </td>
                                             <td>
-                                                <img src="../public/images/category.jpg" alt="category.jpg">
+                                                <img src="{{asset('images/categorys/'.$row->image)}}" style="width:300px" alt="{{ $row->image }}">
                                             </td>
                                             <td>
                                                 <div class="name">
@@ -105,20 +110,23 @@
                                             </td>
                                             <td> {{ $row->slug }}</td>
                                             <td> {{ $row->description }}</td>
-                                            <td>
+                                            <td class="text-center">
+                                                @php
+                                                    $agrs=['id' => $row->id]
+                                                @endphp
                                                 <div class="function_style">
-                                                    <button class="bg-success">
+                                                    <a href="{{ route('admin.category.show', $agrs)}}" class="bg-success">
                                                         <i class="fa fa-solid fa-eye "></i>
-                                                    </button>
-                                                    {{-- <button>
+</a>
+                                                    {{-- <a >
                                                     <i class="fa-solid fa-pen-to-square"></i>
-                                                </button> --}}
-                                                    <button class="bg-primary">
+                                                    </a> --}}
+                                                    <a class="bg-primary" href="{{ route('admin.category.edit', $agrs)}}">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button class="bg-danger">
+                                                    </a>
+                                                    <a class="bg-danger" href="{{ route('admin.category.delete', $agrs)}}">
                                                         <i class="fa fa-solid fa-trash "></i>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
