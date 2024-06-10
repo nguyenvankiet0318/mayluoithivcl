@@ -64,7 +64,7 @@
                                 <label>Vai trò</label>
                                 <select name="roles" class="form-control">
                                     <option value="admin">Admin</option>
-                                    <option value="user">User</option>
+                                    <option value="Customer">Customer</option>
                                 </select>
                             </div>
                             <div class="mb-3">

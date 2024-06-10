@@ -132,6 +132,9 @@
                                                 </div>
                                             </td>
                                             <td> {{ $row->phone }}</td>
+                                            @php
+                                                $args=['id'=>$row->id];
+                                            @endphp
                                             <td>
                                                 <div class="function_style">
                                                     <button class="bg-success">
@@ -140,9 +143,9 @@
                                                     {{-- <button>
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </button> --}}
-                                                    <button class="bg-primary">
+                                                    <a href="{{ route('admin.contact.edit',$args) }}" class="bg-primary">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </button>
+                                                    </a>
                                                     <button class="bg-danger">
                                                         <i class="fa fa-solid fa-trash "></i>
                                                     </button>

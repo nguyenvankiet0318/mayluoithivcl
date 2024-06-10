@@ -39,6 +39,7 @@ class TopicController extends Controller
         $topic -> created_by = Auth::id()??1;
         $topic -> status =$request -> status;
         $topic -> save();
+        $request->session()->flash('addsuccess', 'Thêm thành công.');
         return redirect()->route('admin.topic.index');
     }
 

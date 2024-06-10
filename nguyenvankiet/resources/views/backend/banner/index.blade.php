@@ -27,7 +27,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <form action="{{ route('admin.banner.store') }}" method="post">
+                        <form action="{{ route('admin.banner.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label>Tên banner (*)</label>
@@ -50,6 +50,7 @@
                                 <label for="position">Vị trí (*)</label>
                                 <select name="position" id="position" class="form-control">
                                     <option value="slider-main">Slider Main</option>
+                                    <option value="slider-show">Slider Show</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -95,7 +96,7 @@
                                         {{$row->id}}
                                     </td>
                                     <td>
-                                        <img src="{{asset('images/category/'.$row->link)}}" alt="category.jpg">
+                                        <img src="{{asset('images/banners/'.$row->image)}}" style="width:300px;" alt="{{$row->image}}">
                                     </td>
                                     <td>
                                         {{$row->name}}
@@ -103,26 +104,31 @@
                                     <td>
                                         {{$row->position}}
                                     </td>
-                                    <td>
-                                        <a class="btn btn-sm btn-warning" href="#">Hiện</a>
-                                        <a class="btn btn-sm btn-success" href="#">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-info" href="{{route('admin.category.show',['id', $row->id])}}">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-danger" href="#">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+
+                                    @php
+                                                $args=['id'=>$row->id];
+                                            @endphp
+                                        <td>
+                                            <a class="btn btn-sm btn-warning" href="#">Hiện</a>
+                                            <a class="btn btn-sm btn-success" href="{{route('admin.banner.edit',$args)}}">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-info" href="{{route('admin.category.show',['id', $row->id])}}">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-danger" href="#">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
+
 @endsection

@@ -28,8 +28,6 @@
                 @php
                         $args = ['id' => $brand->id];
                     @endphp
-                    <div class="row">
-                        <div class="col-md-3">
                         <form action="{{ route('admin.brand.update', $args) }}"enctype="multipart/form-data" method="post">
                         @csrf
                         @method('PUT')

@@ -34,6 +34,7 @@ class OrderController extends Controller
     $delivery->updated_by = Auth::id() ?? 1;
     $delivery->status = $request->status;
     $delivery->save();
+    $request->session()->flash('addsuccess', 'Thêm thành công.');
 
     return redirect()->route('admin.order.index');
 }

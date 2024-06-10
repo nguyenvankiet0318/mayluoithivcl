@@ -25,8 +25,6 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                     <div class="col-md-4">
                         <form action="{{ route('admin.user.update',['id'=>$user->id]) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -50,8 +48,8 @@
                                 <label>Giới tính</label>
                                 <select name="gender" class="form-control">
                                 <option value="{{ $user->gender }}">{{ old('gender', $user->gender) }}</option>
-                                    <option value="Nam">Nam</option>
-                                    <option value="Nữ">Nữ</option>
+                                    <option value="Nam" {{($user->gender=="Nam")?'selected':''}}>Nam</option>
+                                    <option value="Nữ" {{($user->gender=="Nữ")?'selected':''}}>Nữ</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -65,9 +63,8 @@
                             <div class="mb-3">
                                 <label>Vai trò</label>
                                 <select name="roles" class="form-control">
-                                    <option value="{{ $user->roles }}">{{ old('roles', $user->roles) }}</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Customer">Customer</option>
+                                    <option value="Admin" {{($user->roles=="admin")?'selected':''}}>Admin</option>
+                                    <option value="Customer" {{($user->roles=="customer")?'selected':''}}>Customer</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -82,8 +79,8 @@
                             <div class="mb-3">
                                 <label>Trạng thái</label>
                                 <select name="status" class="form-control">
-                                    <option value="1">Xuất bản</option>
-                                    <option value="2">Chưa xuất bản</option>
+                                    <option value="1" {{($user->status==1)?'selected':''}}>Xuất bản</option>
+                                    <option value="2" {{($user->status==2)?'selected':''}}>Chưa xuất bản</option>
                                 </select>
                             </div>
                             <div class="card-header text-right">

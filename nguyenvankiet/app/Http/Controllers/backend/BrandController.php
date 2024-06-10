@@ -111,7 +111,6 @@ class BrandController extends Controller
         }
         $brand->name = $request->name;
         $brand->slug = Str::of($request->name)->slug('-');
-       
         $brand->sort_order = $request->sort_order;
         $brand->description = $request->description;
         $brand->created_at = date('Y-m-d H:i:s');
@@ -125,6 +124,8 @@ class BrandController extends Controller
             }
         }
         $brand->save();
+        $request->session()->flash('addsuccess', 'Thêm thành công.');
+
         return redirect()->route('admin.brand.index');
 
     }

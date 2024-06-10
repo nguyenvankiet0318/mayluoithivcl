@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="row">
                      <div class="col-md-4">
-                        <form action="{{ route('admin.post.store') }}" method="post">
+                        <form action="{{ route('admin.post.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label>Tên Post (*)</label>
@@ -102,7 +102,7 @@
                                                 <input type="checkbox">
                                             </td>
                                             <td>
-                                                <img src="../public/images/category.jpg" alt="category.jpg">
+                                                <img src="{{asset('images/posts/'.$row->image)}}" style="width: 300px;" alt="category.jpg">
                                             </td>
                                             <td>
                                                 <div class="title">
@@ -110,28 +110,30 @@
                                                 </div>
                                             </td>
                                             <td> {{ $row->slug }}</td>
+                                            @php
+                                            $args=['id'=>$row->id];
+                                        @endphp
                                             <td>
-                                                <div class="function_style">
-                                                    <button class="bg-success">
-                                                        <i class="fa fa-solid fa-eye "></i>
-                                                    </button>
-                                                    {{-- <button>
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </button> --}}
-                                                    <button class="bg-primary">
-                                                        <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button class="bg-danger">
-                                                        <i class="fa fa-solid fa-trash "></i>
-                                                    </button>
-                                                </div>
+                                                <a href="#" class="btn btn-sm btn-success">
+                                                    <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-info">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="{{ route('admin.post.edit',$args) }}" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>              
+                        </div>
         </section>
     </div>
+
 
 @endsection

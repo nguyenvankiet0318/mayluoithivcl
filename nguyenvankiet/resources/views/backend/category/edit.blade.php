@@ -2,6 +2,7 @@
 @section('title', 'Category')
 @section('content')
     <div class="content-wrapper">
+    <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-12">
@@ -24,8 +25,6 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                     <div class="col-md-4">
                         <form action="{{ route('admin.category.update',['id'=>$category->id]) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -62,8 +61,8 @@
                             <div class="mb-3">
                                 <label>Trạng thái</label>
                                 <select name="status" class="form-control">
-                                    <option value="1">Xuất bản</option>
-                                    <option value="2">Chưa xuất bản</option>
+                                    <option value="1" {{($category->status==1)?'selected':''}}>Xuất bản</option>
+                                    <option value="2" {{($category->status==2)?'selected':''}}>Chưa xuất bản</option>
                                 </select>
                             </div>
                             <div class="card-header text-right">
@@ -76,8 +75,7 @@
                         </form>
                     </div> 
                                            
-                    </div>
-                </div>
+
             </div>
         </section>
     </div>

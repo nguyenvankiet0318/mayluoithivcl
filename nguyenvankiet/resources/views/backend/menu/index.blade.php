@@ -117,18 +117,21 @@
                                             <td> {{ $row->position }}</td>
                                             <td>
                                                 <div class="function_style">
-                                                    <button class="bg-success">
+                                                @php
+                                                    $agrs=['id' => $row->id]
+                                                @endphp
+                                                    <a href="{{ route('admin.menu.show', $agrs) }}" class="bg-success">
                                                         <i class="fa fa-solid fa-eye "></i>
-                                                    </button>
+</a>
                                                     {{-- <button>
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </button> --}}
-                                                    <button class="bg-primary">
+                                                    <a href="{{ route('admin.menu.edit', $agrs) }}"  class="bg-primary">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button class="bg-danger">
+                                                    </a>
+                                                    <a href="{{ route('admin.menu.delete', $agrs) }}" class="bg-danger">
                                                         <i class="fa fa-solid fa-trash "></i>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
