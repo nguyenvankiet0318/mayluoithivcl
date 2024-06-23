@@ -22,7 +22,7 @@ class StoreMenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:6'
+            'name' => 'required|min:1'
         ];
     }
 
@@ -30,7 +30,7 @@ class StoreMenuRequest extends FormRequest
     {
         return [
             'name.required' => 'Tên menu không được để trống !',
-            'name.min' => 'Tên danh mục ít nhất 6 ký tự'
+            'name.min' => 'Tên danh mục ít nhất 1 ký tự'
         ];
     }
 

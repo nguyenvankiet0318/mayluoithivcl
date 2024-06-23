@@ -49,7 +49,7 @@
                             <div class="mb-3">
                                 <label>Menu cha (*)</label>
                                 <select name="parent_id" class="form-control">
-                                    <option value="{{ old('parent_id',$menu->parent_id) }}">None</option>
+                                    <option value="">None</option>
                                     {!! $htmlparentId !!}
                                 </select>
                             </div>
@@ -98,7 +98,7 @@
                             </div>
 
                         </form>
-                    </div> 
+                    </div>
         </div>
         </div>
     </section>
