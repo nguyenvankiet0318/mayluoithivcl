@@ -20,7 +20,7 @@ class MenuController extends Controller
         foreach($list as $item)
         {
             $htmlparentId .= "<option value='".$item->id."'>".$item->name."</option>";
-            $htmlsortOrder .="<option value='" . $item->sort_order + 1 . "'>" . $item->name . "</option>";        
+            $htmlsortOrder .="<option value='" . $item->sort_order + 1 . "'>" . $item->name . "</option>";
         }
         return view("backend.menu.index", compact('list','htmlparentId','htmlsortOrder'));
     }
@@ -66,7 +66,7 @@ public function edit(string $id)
                 else{
                     $htmlparentId .= "<option value='" . $item->id . "'>" . $item->name . "</option>";
                 }
-    
+
                 if($menu->sort_order-1 == $item->sort_order){
                     $htmlsortOrder .= "<option selected value='" . ($item->sort_order + 1) . "'>Sau " . $item->name . "</option>";
                 }
@@ -99,5 +99,19 @@ public function edit(string $id)
 
     return redirect()->route('admin.menu.index');
     }
+    public function destroy($id)
+    {
+        $menu = Menu::find($id);
+        if ($menu == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $menu->delete();
+        return redirect()->route('admin.menu.index');
+
+    }
+
 
 }

@@ -125,7 +125,19 @@ public function edit(string $id)
 
 
 
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+        if ($product == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $product->delete();
+        return redirect()->route('admin.product.index');
 
+    }
 
 
 

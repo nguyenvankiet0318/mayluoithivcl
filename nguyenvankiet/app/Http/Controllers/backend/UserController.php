@@ -121,6 +121,20 @@ class UserController extends Controller
 
 
 
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if ($user == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $user->delete();
+        return redirect()->route('admin.user.index');
+
+    }
+
 
 
 

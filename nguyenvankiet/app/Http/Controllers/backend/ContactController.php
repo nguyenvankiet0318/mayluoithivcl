@@ -61,7 +61,7 @@ class ContactController extends Controller
                     $htmlusers .= "<option value='" . $item->id . "'>" . $item->name . "</option>";
                 }
             }
-   
+
         return view("backend.contact.edit", compact("contact", "htmlusers"));
     }
     public function update(Request $request, string $id)
@@ -90,8 +90,22 @@ class ContactController extends Controller
             }
         }
         $contact->save();
-    
+
         return redirect()->route('admin.contact.index');
     }
+    public function destroy($id)
+    {
+        $contact = Contact::find($id);
+        if ($contact == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $contact->delete();
+        return redirect()->route('admin.contact.index');
+
+    }
+
 
 }

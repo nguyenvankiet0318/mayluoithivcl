@@ -49,7 +49,7 @@
                             <div class="mb-3">
                                 <label>Menu cha (*)</label>
                                 <select name="parent_id" class="form-control">
-                                    <option value="">None</option>
+                                    <option value="0">None</option>
                                     {!! $htmlparentId !!}
                                 </select>
                             </div>

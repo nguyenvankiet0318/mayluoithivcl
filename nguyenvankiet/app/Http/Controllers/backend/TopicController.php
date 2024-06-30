@@ -27,7 +27,7 @@ class TopicController extends Controller
         return view("backend.topic.index",compact("list","htmlparentid","htmlsortorder"));
     }
 
-   
+
     public function store(StoreTopicRequest $request)
     {
         $topic = new Topic();
@@ -103,8 +103,18 @@ class TopicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $topic = Topic::find($id);
+        if ($topic == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $topic->delete();
+        return redirect()->route('admin.topic.index');
+
     }
+
 }

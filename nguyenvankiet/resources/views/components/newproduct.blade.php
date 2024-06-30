@@ -1,25 +1,27 @@
-    {{-- <div class="col-lg-3 col-md-6 special-grid top-featured">
-        @foreach($list_banner as $row)
-        @if($loop->first)
-        <div class="products-single fix">
-            <div class="box-img-hover">
-                <div class="type-lb">
-                    <p class="new">New</p>
+<section class="products-section">
+    <div class="container">
+        <h2 class="section-title">New Products</h2>
+        <div class="row justify-content-center" style="display: flex; margin-left: 13%">
+
+            @foreach ($list->take(6) as $product)
+                <div class="row ">
+                    <div class="col">
+                        <div class="product-item">
+                            <div class="product-image">
+                                <img src="{{ asset('images/products/' . $product->image) }}" alt="{{ $product->image }}">
+                            </div>
+                            <h3 class="product-name">{{ $product->name }}</h3>
+                            <p>
+                                <del>{{ number_format($product->price, 0, ',', '.') }}đ</del>
+                            </p>
+                            <p>Giảm còn: {{ number_format($product->pricesale, 0, ',', '.') }}đ</p>
+                            <a href="{{ route('site.product.detail', ['slug' => $product->slug]) }}"
+                                class="btn btn-primary" style="margin-bottom: 5px;">Mua ngay</a>
+                        </div>
+                    </div>
                 </div>
-                <img src="{{asset('images/products/'.$row->image)}}" class="img-fluid" alt="{{ $row->image }}">
-                <div class="mask-icon">
-                    <ul>
-                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                    </ul>
-                    <a class="cart" href="#">Add to Cart</a>
-                </div>
-            </div>
-            <div class="why-text">
-                <h4>{{ $row->name }}</h4>
-                <h5> {{ $row->price }}</h5>
-            </div>
+            @endforeach
         </div>
-        @endforeach
-    </div> --}}
+
+    </div>
+</section>

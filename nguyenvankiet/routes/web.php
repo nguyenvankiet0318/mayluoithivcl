@@ -1,10 +1,14 @@
 <?php
+use App\Http\Controllers\frontend\LoginController;
 
 use Illuminate\Support\Facades\Route;
 // Site
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductController as SanPhamController;
 use App\Http\Controllers\frontend\ContactController as LienHeController;
+use App\Http\Controllers\frontend\CartController as GioHangController;
+use App\Http\Controllers\frontend\PostController as BaiVietController;
+
 // Admin
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\ProductController;
@@ -17,18 +21,42 @@ use App\Http\Controllers\backend\MenuController;
 use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\TopicController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\frontend\AboutUsController;
+
+use App\Http\Middleware\LoginMiddleware;
 
 
 
-
-
+//frontend
 Route::get('/', [HomeController::class, 'index'])->name('site.home');
 Route::get('san-pham', [SanPhamController::class, 'index'])->name('site.product');
+Route::get('tat-ca-san-pham', [SanPhamController::class, 'index'])->name('site.product.productall');
 Route::get('chi-tiet-san-pham/{slug}', [SanPhamController::class, 'detail'])->name('site.product.detail');
 Route::get('lien-he', [LienHeController::class, 'index'])->name('site.contact');
+Route::get('cart', [LienHeController::class, 'index'])->name('site.contact');
+Route::get('ve-chung-toi', [AboutUsController::class, 'index'])->name('site.policy');
 
-// Admin
-Route::prefix("admin")->group(function () {
+//post
+Route::get('chi-tiet-bai-viet/{slug}', [BaiVietController::class, 'detail'])->name('site.post.detail');
+Route::get('tat-ca-bai-viet', [BaiVietController::class, 'index'])->name('site.post.postall');
+Route::get('chu-de/{slug}', [BaivietController::class, 'topic'])->name('site.post.topic');
+
+//product
+//Product Category
+Route::get('danh-muc/{slug}', [SanPhamController::class, 'category'])->name('site.product.category');
+Route::get('/search', [SanPhamController::class, 'search'])->name('site.product.search');
+//cart
+Route::get("/gio-hang",[GioHangController::class,"index"])->name('site.cart.index');
+Route::get("/cart/addcart",[GioHangController::class,"addcart"])->name('site.cart.addcart');
+Route::post("/cart/update",[GioHangController::class,"update"])->name('site.cart.update');
+Route::get("/cart/delete/{id}",[GioHangController::class,"delete"])->name('site.cart.delete');
+//Login
+Route::get('login', [LoginController::class, 'getlogin'])->name('website.getlogin');
+Route::post('login', [LoginController::class, 'dologin'])->name('website.dologin');
+Route::get('logout', [LoginController::class, 'logout'])->name('website.logout');
+
+// Admin yeu cau dang nhap truoc khi vao ->middleware("middleware")
+Route::prefix("admin")->middleware("middleware")->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index');
 
     //Product
@@ -58,7 +86,7 @@ Route::prefix("admin")->group(function () {
         Route::get('restore/{id}', [CategoryController::class, 'restore'])->name('admin.category.restore');
         Route::get('destroy/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
     });
-    
+
      //Post
      Route::prefix("post")->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('admin.post.index');

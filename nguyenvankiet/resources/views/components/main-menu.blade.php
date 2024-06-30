@@ -1,22 +1,22 @@
-<div>
-
-<nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-left: 200px">
-    <img style="width:50px; height:50px; margin-right:100px" src="{{asset('images/logo.png')}}"></img>
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="/">
+      <img class="image-header"  src="{{asset('images/logo.png')}}">
+    </a>
+      <div class="navbar-menu2" style="margin-left:400px">
         @foreach ($listmenu as $rowmenu)
-        <x-main-menu-item :rowmenu="$rowmenu" />
-    @endforeach
-    <form style="margin-top:10px;margin-left:20px; font-size: 14px;" class="d-flex" role="search">
-        <input class="form-control me-2"  style="height:30px; font-size: 14px;" type="search" placeholder="Search" aria-label="Search">
-        <button style="width:50px; height:30px;font-size: 14px;" class="btn btn-outline-success d-flex justify-content-center" type="submit">
-            <span>Search</span>
-          </button>      </form>
-      <li class="nav-item" style="margin-left: 30px;">
-        <a class="nav-link active" aria-current="page" href="#">Shopping Cart</a>
-      </li>
-    </ul>
-</div>
-</div>
-</nav>
-</div>
+          <x-main-menu-item :rowmenu="$rowmenu" />
+        @endforeach
+        <form class="navbar-search" action="{{ route('site.product.search') }}" method="GET">
+            <input class="search-input" name="search" type="search" placeholder="Search">
+            <button  class="search-button" type="submit">Search</button>
+          </form>
+          @php
+            $count = count(session('carts', []));
+      @endphp
+        <div class="navbar-cart" style="margin-left:20%; color:aliceblue;">
+          <a class="cart-link" href="{{ route('site.cart.index') }}" >Shopping Cart  (<span class="badge" id="showqty">{{ $count }}</span>)</a>
+        </div>
+      </div>
+    </div>
+  </nav>

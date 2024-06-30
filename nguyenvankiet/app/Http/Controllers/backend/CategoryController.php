@@ -22,9 +22,9 @@ class CategoryController extends Controller
         foreach($list as $item)
         {
             $htmlparentId .= "<option value='".$item->id."'>".$item->name."</option>";
-            $htmlsortOrder .="<option value='" . $item->sort_order + 1 . "'>" . $item->name . "</option>";        
+            $htmlsortOrder .="<option value='" . $item->sort_order + 1 . "'>" . $item->name . "</option>";
         }
-        return view("backend.category.index", compact('list','htmlparentId','htmlsortOrder'));  
+        return view("backend.category.index", compact('list','htmlparentId','htmlsortOrder'));
         // return view('backend.category.index',compact("list"));
     }
     public function store(StoreCategoryRequest $request)
@@ -126,8 +126,18 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $category = Catgory::find($id);
+        if ($category == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $category->delete();
+        return redirect()->route('admin.category.index');
+
     }
+
 }

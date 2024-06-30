@@ -24,24 +24,24 @@ class BrandController extends Controller
         $htmlsortOrder = "";
         foreach($list as $item)
         {
-            $htmlsortOrder .="<option value='" . $item->sort_order + 1 . "'>" . $item->name . "</option>";        
+            $htmlsortOrder .="<option value='" . $item->sort_order + 1 . "'>" . $item->name . "</option>";
         }
-        return view("backend.brand.index", compact('list','htmlsortOrder'));  
+        return view("backend.brand.index", compact('list','htmlsortOrder'));
         // return view('backend.category.index',compact("list"));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
      */
-    
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreBrandRequest $request)
     {
-       
+
             $brand = new Brand();
             $brand->name = $request->name;
             $brand->slug = Str::of($request->name)->slug('-');
@@ -59,7 +59,7 @@ class BrandController extends Controller
             }
             $brand->save();
             return redirect()->route('admin.brand.index');
-        
+
     }
 
     /**
@@ -85,10 +85,10 @@ class BrandController extends Controller
             ->select('brand.id', 'brand.name', 'brand.image', 'brand.slug', 'brand.sort_order')
             ->orderBy('brand.created_at', 'desc')
             ->get();
-     
+
         $htmlsortOrder = "";
         foreach ($list as $item) {
-          
+
 
             if($brand->sort_order-1 == $item->sort_order){
                 $htmlsortOrder .= "<option selected value='" . ($item->sort_order + 1) . "'>Sau " . $item->name . "</option>";
@@ -133,8 +133,18 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $brand = Brand::find($id);
+        if ($brand == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $brand->delete();
+        return redirect()->route('admin.brand.index');
+
     }
+
 }

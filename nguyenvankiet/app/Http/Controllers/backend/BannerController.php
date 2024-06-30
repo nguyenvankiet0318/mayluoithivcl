@@ -20,13 +20,13 @@ class BannerController extends Controller
         ->select('banner.id','banner.name','banner.link','banner.image','banner.position')
         ->orderBy('banner.created_at','desc')
         ->get();
-        return view("backend.banner.index",compact("list"));   
+        return view("backend.banner.index",compact("list"));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    
+
     /**
      * Store a newly created resource in storage.
      */
@@ -113,8 +113,18 @@ class BannerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $banner = Banner::find($id);
+        if ($banner == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $banner->delete();
+        return redirect()->route('admin.banner.index');
+
     }
+
 }

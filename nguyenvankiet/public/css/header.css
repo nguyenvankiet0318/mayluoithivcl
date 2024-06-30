@@ -1,7 +1,7 @@
 .headertop {
     width: 100%;
     height: 20px;
-    background-color: #333;
+    background-color: #eacbcb;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,16 +14,18 @@
     justify-content: space-between;
     width: 100%;
 }
-
+.headertop a{
+    font-size: 12px;
+}
 .hotline {
-    margin-left: 15%; /* Cách lề phải 10px */
-    color: #ffffff;
-
+    margin-left: 14%; /* Cách lề phải 10px */
+    color: #666;
+    font-size: 14px;
 }
 
 .headerlogin {
     padding-right: 10%; /* Cách lề phải 10px */
-    color: #ffffff;
+    color: #000000;
 
 }
 

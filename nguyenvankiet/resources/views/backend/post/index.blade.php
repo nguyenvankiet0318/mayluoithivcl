@@ -51,7 +51,7 @@
                                 <label>Chi tiết (*)</label>
                                 <textarea rows="3" name="detail" id="detail" placeholder="Nhập chi tiết sản phẩm" class="form-control"></textarea>
                             </div>
-                          
+
                             <div class="mb-3">
                                 <label>Hình đại diện</label>
                                 <input type="file" name="image" class="form-control">
@@ -81,7 +81,7 @@
                                 </button>
                             </div>
                         </form>
-                    </div>          
+                    </div>
                     <div class="col-md-8">
                             <table class="table table-bordered">
             <thead>
@@ -123,7 +123,7 @@
                                                 <a href="{{ route('admin.post.edit',$args) }}" class="btn btn-sm btn-primary">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-sm btn-danger">
+                                                <a href="{{ route('admin.post.destroy',$args) }}" class="btn btn-sm btn-danger">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
                                             </td>

@@ -1,4 +1,3 @@
-<link rel="stylesheet" href={{asset('css/header.css')}}>
 
 <div class="headertop">
     <div class="headermain">

@@ -38,4 +38,19 @@ class OrderController extends Controller
 
     return redirect()->route('admin.order.index');
 }
+public function destroy($id)
+{
+    $order = Order::find($id);
+    if ($order == null) {
+        return response()->json(
+            ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+            404
+        );
+    }
+    $order->delete();
+    return redirect()->route('admin.order.index');
+
+}
+
+
 }

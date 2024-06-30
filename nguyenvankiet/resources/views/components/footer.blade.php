@@ -1,25 +1,27 @@
-<footer class="footer">
+
+<footer class="footer" style="display:flex; justify-content: center;">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
-          <h5>About Us</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div style="display:flex; justify-content: center;" >
+        <div class="col">
+          <h5>Về chúng tôi</h5>
+          <p>{{$about_us->detail}}</p>
         </div>
-        <div class="col-md-4">
+    </div>
+        <div class="col-md-4" >
           <h5>Quick Links</h5>
           <ul class="list-unstyled">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Contact</a></li>
+            @foreach ($listmenu as $item)
+            <li><a href="{{$item->link}}">{{$item->name}}</a></li>
+           @endforeach
           </ul>
         </div>
-        <div class="col-md-4">
-          <h5>Contact Us</h5>
+        <div class="col-md-4" >
+          <h5>Liên hệ chúng tôi</h5>
           <ul class="list-unstyled">
-            <li>123 Main Street</li>
-            <li>Anytown, USA 12345</li>
-            <li>Email: info@example.com</li>
-            <li>Phone: (123) 456-7890</li>
+            <li>Địa chỉ: {{$list_contactadmin->address}}</li>
+            <li>Email: {{$list_contactadmin->email}}</li>
+            <li>Số điện thoại: {{$list_contactadmin->phone}}</li>
           </ul>
         </div>
       </div>

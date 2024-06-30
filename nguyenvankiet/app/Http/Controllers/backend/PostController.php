@@ -43,7 +43,7 @@ class PostController extends Controller
         $post->status = $request->status; //form
         $post->save(); //Luuu vao CSDL
         $request->session()->flash('addsuccess', 'Thêm thành công.');
-        return redirect()->route('admin.post.index'); 
+        return redirect()->route('admin.post.index');
     }
     //
     public function edit(string $id)
@@ -117,5 +117,19 @@ class PostController extends Controller
         $post->save(); //Luuu vao CSDL
         return redirect()->route('admin.post.index');
     }
+    public function destroy($id)
+    {
+        $post = Post::find($id);
+        if ($post == null) {
+            return response()->json(
+                ['message' => 'Tai du lieu khong thanh cong', 'success' => false, 'id' => null],
+                404
+            );
+        }
+        $post->delete();
+        return redirect()->route('admin.post.index');
+
+    }
+
 
 }

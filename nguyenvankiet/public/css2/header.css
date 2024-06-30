@@ -1,0 +1,34 @@
+.headertop {
+    width: 100%;
+    height: 20px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px; /* Thêm khoảng cách 10px từ hai bên */
+}
+
+.headermain {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.headertop a{
+    font-size: 12px;
+}
+.hotline {
+    margin-left: 14%; /* Cách lề phải 10px */
+    color: #666;
+    font-size: 14px;
+}
+
+.headerlogin {
+    padding-right: 10%; /* Cách lề phải 10px */
+    color: #666;
+
+}
+
+.headerlogin:hover {
+    color: #ff0000;
+}

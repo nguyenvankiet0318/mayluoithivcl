@@ -97,7 +97,7 @@
                                 </button>
                             </div>
                         </form>
-                    </div>          
+                    </div>
                     <div class="col-md-8">
                             <table class="table table-bordered">
             <thead>
@@ -141,14 +141,14 @@
                                                 <div class="function_style">
                                                     <a href="{{ route('admin.product.show', $agrs)}}" class="bg-success">
                                                         <i class="fa fa-solid fa-eye "></i>
-                                                    </a>    
+                                                    </a>
                                                     {{-- <a>
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a> --}}
                                                     <a href="{{ route('admin.product.edit', $agrs)}}" class="bg-primary">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{{ route('admin.product.delete', $agrs)}}" class="bg-danger">
+                                                    <a href="{{ route('admin.product.destroy', $agrs)}}" class="bg-danger">
                                                         <i class="fa fa-solid fa-trash "></i>
                                                     </a>
                                                 </div>
@@ -157,7 +157,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>              
+                        </div>
         </section>
     </div>
 

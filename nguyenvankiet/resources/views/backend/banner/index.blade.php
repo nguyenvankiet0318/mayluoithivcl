@@ -58,7 +58,7 @@
                                 <textarea type="text" id="description" name="description" id="description" placeholder="Nhập mô tả danh mục"
                                     class="form-control" onkeydown="handle_slug(this.value);">{{ old('description') }}</textarea>
                             </div>
-                        
+
                             <div class="mb-3">
                                 <label for="status">Trạng thái</label>
                                 <select name="status" id="status" class="form-control">
@@ -113,10 +113,10 @@
                                             <a class="btn btn-sm btn-success" href="{{route('admin.banner.edit',$args)}}">
                                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-info" href="{{route('admin.category.show',['id', $row->id])}}">
+                                            <a class="btn btn-sm btn-info" href="{{route('admin.banner.show',$args)}}">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger" href="#">
+                                            <a class="btn btn-sm btn-danger" href="{{route('admin.banner.destroy',$args)}}">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         </td>
